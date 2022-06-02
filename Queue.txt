@@ -1,0 +1,70 @@
+Module Module1
+    Public myQueue(9) As Integer
+    Public rearPointer As Integer = -1
+    Public frontPointer As Integer = 0
+    Public Const queueSize As Integer = 10
+    Public queueLength = 0
+    Public item As Integer
+    Dim choice As String
+
+
+    Sub Main()
+        While choice <> "output"
+            Console.WriteLine("WOULD YOU LIKE TO ENQUEUE OR DEQUEUE")
+            choice = Console.ReadLine()
+
+            Select Case choice
+                Case "Enqueue"
+                    Call EnQueue(item)
+                Case "Dequeue"
+                    Call DeQueue()
+
+            End Select
+        End While
+        Call Output()
+        Console.ReadKey()
+
+
+    End Sub
+
+    Sub Output()
+        For i = frontPointer To rearPointer
+
+            Console.WriteLine(myQueue(i))
+        Next
+    End Sub
+    Sub DeQueue()
+        If queueLength = 0 Then
+            Console.WriteLine("Queue is empty, cannot dequeue")
+        Else
+            item = myQueue(frontPointer)
+            If frontPointer = myQueue.Length - 1 Then
+                frontPointer = 0
+            Else
+                frontPointer = frontPointer + 1
+            End If
+            queueLength = queueLength - 1
+        End If
+
+    End Sub
+
+    Sub EnQueue(ByVal item As Integer)
+        If queueLength < queueSize Then
+            If rearPointer < myQueue.Length - 1 Then
+                rearPointer = rearPointer + 1
+            Else
+                rearPointer = 0
+            End If
+            queueLength = queueLength + 1
+            Console.WriteLine("enter item ")
+            item = Console.ReadLine
+            myQueue(rearPointer) = item
+        Else
+            Console.WriteLine("Queue is full, cannot enqueue")
+        End If
+    End Sub
+
+
+
+
+End Module
